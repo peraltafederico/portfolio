@@ -53,6 +53,9 @@ export function Hero() {
       .fromTo(title, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
       .fromTo(bio, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
       .fromTo(nav, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
+
+    const cta = el.querySelector('[data-hero="cta"]')
+    if (cta) tl.fromTo(cta, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
       .fromTo(links, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
 
     return () => { tl.kill() }
@@ -88,7 +91,7 @@ export function Hero() {
         </p>
 
         <a
-          data-hero="bio"
+          data-hero="cta"
           href="/contact"
           className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 lg:hidden"
           style={{

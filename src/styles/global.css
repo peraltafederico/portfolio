@@ -32,6 +32,7 @@ body {
 [data-hero="title"],
 [data-hero="bio"],
 [data-hero="nav"],
-[data-hero="links"] {
+[data-hero="links"],
+[data-hero="cta"] {
   opacity: 0;
 }
