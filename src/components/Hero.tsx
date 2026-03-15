@@ -122,7 +122,7 @@ export function Hero() {
       <div data-hero="links" className="flex items-center gap-4 mt-8 lg:mt-0">
         <a
           href="/contact"
-          className="inline-flex items-center px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 hover:scale-105"
+          className="inline-flex items-center px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 hover:scale-105 lg:hidden"
           style={{
             backgroundColor: dark ? '#ffffff' : '#171717',
             color: dark ? '#141414' : '#ffffff',
