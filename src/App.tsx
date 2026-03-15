@@ -1,12 +1,13 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Hero } from './components/Hero'
 import { About } from './components/About'
+import { Approach } from './components/Approach'
 import { Experience } from './components/Experience'
 import { Skills } from './components/Skills'
 import { Footer } from './components/Footer'
 import { ScrollTrigger } from './hooks/useGsap'
 
-const sections = ['about', 'experience', 'skills'] as const
+const sections = ['about', 'approach', 'experience', 'skills'] as const
 
 function App() {
   const [dark, setDark] = useState(() => {
@@ -53,6 +54,7 @@ function App() {
         />
         <main className="lg:w-1/2 lg:py-24 pb-24">
           <About dark={dark} />
+          <Approach dark={dark} />
           <Experience dark={dark} />
           <Skills dark={dark} />
           <Footer dark={dark} />
