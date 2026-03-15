@@ -16,23 +16,13 @@ const companies = [
   'Swiss Medical',
 ]
 
-const pillPositions = [
-  { x: 12, y: 20, rotation: -8 },
-  { x: 55, y: 45, rotation: 12 },
-  { x: 30, y: 70, rotation: -5 },
-  { x: 72, y: 15, rotation: 10 },
-  { x: 8, y: 55, rotation: -12 },
-  { x: 48, y: 80, rotation: 7 },
-  { x: 78, y: 55, rotation: -10 },
-]
-
 export function Contact() {
   const { dark, setDark } = useTheme()
   const navigate = useNavigate()
   const pageRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
   const successRef = useRef<HTMLDivElement>(null)
-  const pillRefs = useRef<(HTMLSpanElement | null)[]>([])
+  const pillsRef = useRef<HTMLDivElement>(null)
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -70,26 +60,17 @@ export function Contact() {
     )
   }, [])
 
-  // Falling pills animation
+  // Stagger company pills
   useEffect(() => {
-    const pills = pillRefs.current
-    if (!pills.length) return
+    const container = pillsRef.current
+    if (!container) return
 
-    pills.forEach((pill, i) => {
-      if (!pill) return
-      gsap.fromTo(pill,
-        { y: -300, opacity: 0, scale: 0.5, rotation: pillPositions[i].rotation * 3 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          rotation: pillPositions[i].rotation,
-          duration: 1,
-          ease: 'bounce.out',
-          delay: 0.3 + i * 0.15,
-        }
-      )
-    })
+    const pills = container.querySelectorAll('[data-pill]')
+    gsap.fromTo(
+      pills,
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, delay: 0.6, ease: 'power3.out' }
+    )
   }, [])
 
   // Success animation
@@ -281,27 +262,23 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="mt-10">
+        <div ref={pillsRef} className="mt-10 text-center">
           <p
             className="text-xs font-medium uppercase tracking-widest mb-4"
             style={{ color: mutedColor }}
           >
             Companies I've worked with
           </p>
-          <div className="relative h-48 md:h-64">
-            {companies.map((company, i) => (
+          <div className="flex flex-wrap justify-center gap-2">
+            {companies.map((company) => (
               <span
                 key={company}
-                ref={(el) => { pillRefs.current[i] = el }}
-                className="absolute px-4 py-2 rounded-full text-xs font-medium cursor-default transition-[transform,filter] duration-200 hover:scale-105 hover:brightness-125"
+                data-pill
+                className="px-3 py-1.5 rounded-full text-xs font-medium"
                 style={{
-                  left: `${pillPositions[i].x}%`,
-                  top: `${pillPositions[i].y}%`,
-                  transform: `rotate(${pillPositions[i].rotation}deg)`,
                   backgroundColor: pillBg,
                   border: `1px solid ${pillBorder}`,
                   color: mutedColor,
-                  opacity: 0,
                 }}
               >
                 {company}
