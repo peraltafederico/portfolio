@@ -38,35 +38,7 @@ export function ContactForm() {
   const pillBg = dark ? '#1a1a1a' : '#f5f5f5'
   const pillBorder = dark ? '#2a2a2a' : '#e0e0e0'
 
-  useEffect(() => {
-    const el = pageRef.current
-    if (!el) return
-    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' })
-  }, [])
-
-  useEffect(() => {
-    const form = formRef.current
-    if (!form) return
-
-    const fields = form.querySelectorAll('[data-field]')
-    gsap.fromTo(
-      fields,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.2, ease: 'power3.out' }
-    )
-  }, [])
-
-  useEffect(() => {
-    const container = pillsRef.current
-    if (!container) return
-
-    const pills = container.querySelectorAll('[data-pill]')
-    gsap.fromTo(
-      pills,
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, delay: 0.6, ease: 'power3.out' }
-    )
-  }, [])
+  
 
   useEffect(() => {
     if (status !== 'success') return
