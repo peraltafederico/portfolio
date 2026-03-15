@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro'
+import { env } from 'cloudflare:workers'
 
 function sanitize(str: string): string {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
@@ -17,7 +18,7 @@ export const POST: APIRoute = async ({ request }) => {
     })
   }
 
-  const RESEND_API_KEY = import.meta.env.RESEND_API_KEY
+  const RESEND_API_KEY = (env as any).RESEND_API_KEY
 
   try {
     const res = await fetch('https://api.resend.com/emails', {
