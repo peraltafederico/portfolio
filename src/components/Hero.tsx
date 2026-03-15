@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { Github, Linkedin, Mail, Instagram } from 'lucide-react'
 import { gsap, ScrollTrigger } from '../hooks/useGsap'
 import { useTheme } from '../hooks/useTheme'
 
@@ -138,6 +138,16 @@ export function Hero() {
           aria-label="LinkedIn"
         >
           <Linkedin size={18} />
+        </a>
+        <a
+          href="https://www.instagram.com/_pfederico/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="transition-all duration-200 hover:scale-110"
+          style={{ color: mutedColor }}
+          aria-label="Instagram"
+        >
+          <Instagram size={18} />
         </a>
         <a
           href="/contact"
