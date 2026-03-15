@@ -12,7 +12,7 @@ export function About({ dark }: { dark: boolean }) {
       </h2>
       <div className="space-y-4 text-sm leading-relaxed" style={{ color: textColor }}>
         <p>
-          I am a proficient senior fullstack developer with over seven years of experience in JavaScript/TypeScript, passionate about engaging in every stage of application development.
+          Senior fullstack engineer with 7+ years shipping production software. AI is at the center of how I work: I use multi-agent orchestration, Claude Code, and LLM integrations to automate entire development workflows.
         </p>
         <p>
           In frontend development, I have extensive experience with React, including its ecosystem frameworks such as Next.js, Gatsby, and React Native, as well as proficiency in essential React development tools like React Query, React Hook Form, Apollo Client, Redux, Tailwind CSS, Styled Components, and Material-UI.
@@ -22,6 +22,9 @@ export function About({ dark }: { dark: boolean }) {
         </p>
         <p>
           In cloud computing, I have a strong background creating and maintaining CI/CD workflows with GitHub Actions, GitLab CI, and Jenkins, and also building scalable infrastructures using AWS services like ECS, Beanstalk, and Kubernetes (EKS).
+        </p>
+        <p>
+          I ship what used to take a team, solo. My stack isn't a fixed list, it's whatever solves the problem best.
         </p>
       </div>
     </section>

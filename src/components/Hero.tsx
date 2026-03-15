@@ -4,7 +4,7 @@ import { gsap } from '../hooks/useGsap'
 
 const navItems = [
   { id: 'about', label: 'About' },
-  { id: 'approach', label: 'How I Work' },
+
   { id: 'experience', label: 'Experience' },
   { id: 'skills', label: 'Skills' },
 ]
