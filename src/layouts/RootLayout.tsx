@@ -29,11 +29,13 @@ export function RootLayout() {
     const el = spotlightRef.current
     if (!el) return
 
+    const color = dark ? 'rgba(100, 100, 255, 0.06)' : 'rgba(100, 100, 255, 0.04)'
+
     let raf = 0
     const onMove = (e: MouseEvent) => {
       cancelAnimationFrame(raf)
       raf = requestAnimationFrame(() => {
-        el.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(100, 100, 255, 0.06), transparent 80%)`
+        el.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, ${color}, transparent 80%)`
       })
     }
 
@@ -49,16 +51,14 @@ export function RootLayout() {
       window.removeEventListener('mousemove', onMove)
       document.removeEventListener('mouseleave', onLeave)
     }
-  }, [])
+  }, [dark])
 
   return (
     <ThemeContext.Provider value={{ dark, setDark }}>
-      {dark && (
-        <div
-          ref={spotlightRef}
-          className="pointer-events-none fixed inset-0 z-50 transition-opacity duration-300"
-        />
-      )}
+      <div
+        ref={spotlightRef}
+        className="pointer-events-none fixed inset-0 z-50 transition-opacity duration-300"
+      />
       <Outlet />
     </ThemeContext.Provider>
   )
