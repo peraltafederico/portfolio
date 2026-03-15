@@ -59,8 +59,8 @@ export function ContactCTA() {
       start: 'top 75%',
       once: true,
       onEnter: () => {
-        gsap.from(subtitle, { opacity: 0, y: 20, duration: 0.8, delay: 0.5, ease: 'power3.out' })
-        gsap.from(button, { opacity: 0, y: 20, duration: 0.8, delay: 0.7, ease: 'power3.out' })
+        gsap.fromTo(subtitle, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.5, ease: 'power3.out' })
+        gsap.fromTo(button, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.7, ease: 'power3.out' })
       },
     })
 
