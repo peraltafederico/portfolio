@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Github, Linkedin, Mail, Moon, Sun } from 'lucide-react'
+import { Github, Linkedin, Mail } from 'lucide-react'
 import { gsap } from '../hooks/useGsap'
 
 const navItems = [
@@ -12,12 +12,11 @@ const navItems = [
 
 interface HeroProps {
   dark: boolean
-  onToggle: () => void
   activeSection: string
   onNav: (e: React.MouseEvent<HTMLAnchorElement>, id: string) => void
 }
 
-export function Hero({ dark, onToggle, activeSection, onNav }: HeroProps) {
+export function Hero({ dark, activeSection, onNav }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const mutedColor = dark ? '#888' : '#666'
   const textColor = dark ? '#ededed' : '#171717'
@@ -127,14 +126,7 @@ export function Hero({ dark, onToggle, activeSection, onNav }: HeroProps) {
         >
           <Mail size={18} />
         </a>
-        <button
-          onClick={onToggle}
-          className="p-1 transition-all duration-200 hover:scale-110 cursor-pointer ml-2"
-          style={{ color: mutedColor }}
-          aria-label="Toggle theme"
-        >
-          {dark ? <Sun size={16} /> : <Moon size={16} />}
-        </button>
+
       </div>
     </header>
   )

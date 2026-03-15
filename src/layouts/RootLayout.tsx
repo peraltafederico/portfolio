@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, createContext, useContext } from 'react'
+import { Moon, Sun } from 'lucide-react'
 import { Outlet } from '@tanstack/react-router'
 
 interface ThemeContextValue {
@@ -59,6 +60,14 @@ export function RootLayout() {
         ref={spotlightRef}
         className="pointer-events-none fixed inset-0 z-50 transition-opacity duration-300"
       />
+      <button
+        onClick={() => setDark(!dark)}
+        className="fixed top-6 right-6 z-50 p-2 transition-all duration-200 hover:scale-110 cursor-pointer rounded-full"
+        style={{ color: dark ? '#888' : '#666' }}
+        aria-label="Toggle theme"
+      >
+        {dark ? <Sun size={18} /> : <Moon size={18} />}
+      </button>
       <Outlet />
     </ThemeContext.Provider>
   )

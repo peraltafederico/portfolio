@@ -10,7 +10,7 @@ import { ScrollTrigger } from './hooks/useGsap'
 const sections = ['about', 'experience', 'skills'] as const
 
 function App() {
-  const [dark, setDark] = useState(() => {
+  const [dark] = useState(() => {
     const saved = localStorage.getItem('theme')
     return saved ? saved === 'dark' : true
   })
@@ -48,7 +48,6 @@ function App() {
       <div className="mx-auto max-w-screen-xl lg:flex lg:justify-between lg:gap-16">
         <Hero
           dark={dark}
-          onToggle={() => setDark(!dark)}
           activeSection={activeSection}
           onNav={handleNav}
         />

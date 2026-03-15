@@ -11,7 +11,7 @@ import { useTheme } from '../layouts/RootLayout'
 const sections = ['about', 'experience', 'skills', 'contact'] as const
 
 export function Home() {
-  const { dark, setDark } = useTheme()
+  const { dark } = useTheme()
   const [activeSection, setActiveSection] = useState<string>('about')
 
   useEffect(() => {
@@ -41,7 +41,6 @@ export function Home() {
       <div className="mx-auto max-w-screen-xl lg:flex lg:justify-between lg:gap-16">
         <Hero
           dark={dark}
-          onToggle={() => setDark(!dark)}
           activeSection={activeSection}
           onNav={handleNav}
         />
