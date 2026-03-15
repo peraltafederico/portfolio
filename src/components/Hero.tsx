@@ -54,8 +54,6 @@ export function Hero() {
       .fromTo(bio, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
       .fromTo(nav, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
 
-    const cta = el.querySelector('[data-hero="cta"]')
-    if (cta) tl.fromTo(cta, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
       .fromTo(links, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
 
     return () => { tl.kill() }
@@ -90,18 +88,6 @@ export function Hero() {
           Senior fullstack engineer who ships fast. I use AI agents (Claude Code, multi-agent orchestration) as force multipliers, automating the repetitive so I can focus on the problems that actually matter. 7+ years building production apps with TypeScript, React, and Node.js, from fintech to healthcare to developer tools.
         </p>
 
-        <a
-          data-hero="cta"
-          href="/contact"
-          className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 lg:hidden"
-          style={{
-            backgroundColor: dark ? '#ffffff' : '#171717',
-            color: dark ? '#141414' : '#ffffff',
-          }}
-        >
-          Get in touch
-        </a>
-
         <nav data-hero="nav" className="hidden lg:block mt-12">
           <ul className="space-y-3">
             {navItems.map(({ id, label }) => {
@@ -134,6 +120,16 @@ export function Hero() {
       </div>
 
       <div data-hero="links" className="flex items-center gap-4 mt-8 lg:mt-0">
+        <a
+          href="/contact"
+          className="inline-flex items-center px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 hover:scale-105"
+          style={{
+            backgroundColor: dark ? '#ffffff' : '#171717',
+            color: dark ? '#141414' : '#ffffff',
+          }}
+        >
+          Get in touch
+        </a>
         <a
           href="https://github.com/peraltafederico"
           target="_blank"
