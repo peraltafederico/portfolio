@@ -52,7 +52,7 @@ export function ContactCTA() {
   }
 
   return (
-    <section ref={sectionRef} className="py-32 lg:py-40">
+    <section id="contact" ref={sectionRef} className="py-32 lg:py-40">
       <h2
         ref={headingRef}
         className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight"

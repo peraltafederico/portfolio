@@ -7,6 +7,7 @@ const navItems = [
 
   { id: 'experience', label: 'Experience' },
   { id: 'skills', label: 'Skills' },
+  { id: 'contact', label: 'Contact' },
 ]
 
 interface HeroProps {
