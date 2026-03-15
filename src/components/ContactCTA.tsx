@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { gsap, ScrollTrigger } from '../hooks/useGsap'
+import { gsap } from '../hooks/useGsap'
 import { useTheme } from '../layouts/RootLayout'
 
 export function ContactCTA() {
@@ -47,26 +47,6 @@ export function ContactCTA() {
     }
   }, [])
 
-  useEffect(() => {
-    const section = sectionRef.current
-    if (!section) return
-
-    const subtitle = section.querySelector('[data-cta="subtitle"]')
-    const button = section.querySelector('[data-cta="button"]')
-
-    const trigger = ScrollTrigger.create({
-      trigger: section,
-      start: 'top 75%',
-      once: true,
-      onEnter: () => {
-        gsap.fromTo(subtitle, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.5, ease: 'power3.out' })
-        gsap.fromTo(button, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.7, ease: 'power3.out' })
-      },
-    })
-
-    return () => trigger.kill()
-  }, [])
-
   const handleClick = () => {
     void navigate({ to: '/contact' })
   }
@@ -81,14 +61,12 @@ export function ContactCTA() {
         Let's talk
       </h2>
       <p
-        data-cta="subtitle"
         className="text-base sm:text-lg mt-6 max-w-md leading-relaxed"
         style={{ color: mutedColor }}
       >
         Have a project in mind? Looking for a senior engineer? Drop me a message.
       </p>
       <button
-        data-cta="button"
         onClick={handleClick}
         className="mt-10 px-8 py-3 text-sm font-medium tracking-wide rounded-full border transition-all duration-200 hover:scale-105 cursor-pointer"
         style={{
