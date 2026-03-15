@@ -1,0 +1,35 @@
+---
+const skills = [
+  // AI
+  'Claude Code', 'Multi-Agent Orchestration', 'OpenAI API', 'Gemini API',
+  'Prompt Engineering', 'Vercel AI SDK', 'RAG',
+  // Frontend
+  'TypeScript', 'React', 'React Native', 'Next.js', 'Styled Components',
+  'CSS', 'Tailwind CSS', 'React Query / TanStack', 'Apollo Client',
+  // Backend
+  'Node.js', 'Express', 'NestJS', 'GraphQL', 'WebSockets',
+  'Apollo Server', 'Prisma', 'SignalR',
+  // Databases
+  'PostgreSQL', 'MySQL', 'MongoDB', 'Supabase', 'Redis',
+  // Cloud & Infra
+  'AWS', 'GCP', 'Cloudflare Workers', 'EKS', 'Kubernetes',
+  'Istio', 'Karpenter', 'Docker', 'Terraform',
+  // Auth & Payments
+  'Auth0', 'Stripe',
+  // Testing & CI/CD
+  'Unit Testing', 'Jest', 'Mocha', 'Playwright',
+  'GitHub Actions', 'GitLab CI',
+]
+---
+<section id="skills" class="py-20 lg:py-24">
+  <h2 class="text-sm font-medium uppercase tracking-widest mb-10 text-gray-500 dark:text-gray-400">
+    Skills
+  </h2>
+  <div class="flex flex-wrap gap-2">
+    {skills.map((skill) => (
+      <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-neutral-100 border border-neutral-200 text-neutral-600 dark:bg-[#141414] dark:border-[#1f1f1f] dark:text-neutral-400">
+        {skill}
+      </span>
+    ))}
+  </div>
+</section>

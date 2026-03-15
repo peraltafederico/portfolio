@@ -1,13 +1,11 @@
 import { useEffect, useRef } from 'react'
-import { useNavigate } from '@tanstack/react-router'
 import { gsap } from '../hooks/useGsap'
-import { useTheme } from '../layouts/RootLayout'
+import { useTheme } from '../hooks/useTheme'
 
 export function ContactCTA() {
   const { dark } = useTheme()
   const headingRef = useRef<HTMLHeadingElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
-  const navigate = useNavigate()
 
   const mutedColor = dark ? '#888' : '#666'
   const textColor = dark ? '#ededed' : '#171717'
@@ -47,10 +45,6 @@ export function ContactCTA() {
     }
   }, [])
 
-  const handleClick = () => {
-    void navigate({ to: '/contact' })
-  }
-
   return (
     <section id="contact" ref={sectionRef} className="py-32 lg:py-40">
       <h2
@@ -66,9 +60,9 @@ export function ContactCTA() {
       >
         Have a project in mind? Looking for a senior engineer? Drop me a message.
       </p>
-      <button
-        onClick={handleClick}
-        className="mt-10 px-8 py-3 text-sm font-medium tracking-wide rounded-full border transition-all duration-200 hover:scale-105 cursor-pointer"
+      <a
+        href="/contact"
+        className="inline-block mt-10 px-8 py-3 text-sm font-medium tracking-wide rounded-full border transition-all duration-200 hover:scale-105"
         style={{
           color: textColor,
           borderColor: buttonBorder,
@@ -76,7 +70,7 @@ export function ContactCTA() {
         }}
       >
         Get in touch
-      </button>
+      </a>
     </section>
   )
 }

@@ -1,26 +1,42 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { Github, Linkedin, Mail } from 'lucide-react'
-import { gsap } from '../hooks/useGsap'
+import { gsap, ScrollTrigger } from '../hooks/useGsap'
+import { useTheme } from '../hooks/useTheme'
 
 const navItems = [
   { id: 'about', label: 'About' },
-
   { id: 'experience', label: 'Experience' },
   { id: 'skills', label: 'Skills' },
   { id: 'contact', label: 'Contact' },
 ]
 
-interface HeroProps {
-  dark: boolean
-  activeSection: string
-  onNav: (e: React.MouseEvent<HTMLAnchorElement>, id: string) => void
-}
+const sections = ['about', 'experience', 'skills', 'contact'] as const
 
-export function Hero({ dark, activeSection, onNav }: HeroProps) {
+export function Hero() {
+  const { dark } = useTheme()
   const containerRef = useRef<HTMLDivElement>(null)
+  const [activeSection, setActiveSection] = useState<string>('about')
+
   const mutedColor = dark ? '#888' : '#666'
   const textColor = dark ? '#ededed' : '#171717'
   const activeColor = dark ? '#ededed' : '#171717'
+
+  useEffect(() => {
+    const triggers: ScrollTrigger[] = []
+
+    sections.forEach((id) => {
+      const trigger = ScrollTrigger.create({
+        trigger: `#${id}`,
+        start: 'top center',
+        end: 'bottom center',
+        onEnter: () => setActiveSection(id),
+        onEnterBack: () => setActiveSection(id),
+      })
+      triggers.push(trigger)
+    })
+
+    return () => triggers.forEach((t) => t.kill())
+  }, [])
 
   useEffect(() => {
     const el = containerRef.current
@@ -40,6 +56,11 @@ export function Hero({ dark, activeSection, onNav }: HeroProps) {
       .fromTo(links, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
 
     return () => { tl.kill() }
+  }, [])
+
+  const handleNav = useCallback((e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault()
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }, [])
 
   return (
@@ -74,7 +95,7 @@ export function Hero({ dark, activeSection, onNav }: HeroProps) {
                 <li key={id}>
                   <a
                     href={`#${id}`}
-                    onClick={(e) => onNav(e, id)}
+                    onClick={(e) => handleNav(e, id)}
                     className="group flex items-center gap-3 text-xs font-medium uppercase tracking-widest transition-all duration-200 hover:!text-[var(--nav-active)]"
                     style={{
                       color: isActive ? activeColor : mutedColor,
@@ -126,7 +147,6 @@ export function Hero({ dark, activeSection, onNav }: HeroProps) {
         >
           <Mail size={18} />
         </a>
-
       </div>
     </header>
   )

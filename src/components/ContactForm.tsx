@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from '@tanstack/react-router'
 import { ArrowLeft, Check } from 'lucide-react'
 import { gsap } from '../hooks/useGsap'
-import { useTheme } from '../layouts/RootLayout'
+import { useTheme } from '../hooks/useTheme'
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -16,9 +15,8 @@ const companies = [
   'Swiss Medical',
 ]
 
-export function Contact() {
+export function ContactForm() {
   const { dark } = useTheme()
-  const navigate = useNavigate()
   const pageRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
   const successRef = useRef<HTMLDivElement>(null)
@@ -40,14 +38,12 @@ export function Contact() {
   const pillBg = dark ? '#1a1a1a' : '#f5f5f5'
   const pillBorder = dark ? '#2a2a2a' : '#e0e0e0'
 
-  // Page fade-in
   useEffect(() => {
     const el = pageRef.current
     if (!el) return
     gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' })
   }, [])
 
-  // Stagger form fields
   useEffect(() => {
     const form = formRef.current
     if (!form) return
@@ -60,7 +56,6 @@ export function Contact() {
     )
   }, [])
 
-  // Stagger company pills
   useEffect(() => {
     const container = pillsRef.current
     if (!container) return
@@ -73,7 +68,6 @@ export function Contact() {
     )
   }, [])
 
-  // Success animation
   useEffect(() => {
     if (status !== 'success') return
     const form = formRef.current
@@ -96,14 +90,14 @@ export function Contact() {
   const handleBack = () => {
     const el = pageRef.current
     if (!el) {
-      void navigate({ to: '/' })
+      window.location.href = '/'
       return
     }
     gsap.to(el, {
       opacity: 0,
       duration: 0.3,
       ease: 'power2.in',
-      onComplete: () => void navigate({ to: '/' }),
+      onComplete: () => { window.location.href = '/' },
     })
   }
 
@@ -133,12 +127,6 @@ export function Contact() {
   }
 
   const inputClasses = 'w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-200'
-  const inputStyle = (focused: string) => ({
-    backgroundColor: inputBg,
-    border: `1px solid ${inputBorder}`,
-    color: textColor,
-    '--focus-border': focused,
-  }) as React.CSSProperties
 
   return (
     <div ref={pageRef} className="min-h-screen flex flex-col px-6 md:px-12 lg:px-24">
@@ -181,7 +169,11 @@ export function Contact() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Your name"
               className={inputClasses}
-              style={inputStyle(inputFocusBorder)}
+              style={{
+                backgroundColor: inputBg,
+                border: `1px solid ${inputBorder}`,
+                color: textColor,
+              }}
               onFocus={(e) => (e.target.style.borderColor = inputFocusBorder)}
               onBlur={(e) => (e.target.style.borderColor = inputBorder)}
             />
@@ -198,7 +190,11 @@ export function Contact() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
               className={inputClasses}
-              style={inputStyle(inputFocusBorder)}
+              style={{
+                backgroundColor: inputBg,
+                border: `1px solid ${inputBorder}`,
+                color: textColor,
+              }}
               onFocus={(e) => (e.target.style.borderColor = inputFocusBorder)}
               onBlur={(e) => (e.target.style.borderColor = inputBorder)}
             />
@@ -215,7 +211,11 @@ export function Contact() {
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Tell me about your project..."
               className={`${inputClasses} resize-none`}
-              style={inputStyle(inputFocusBorder)}
+              style={{
+                backgroundColor: inputBg,
+                border: `1px solid ${inputBorder}`,
+                color: textColor,
+              }}
               onFocus={(e) => (e.target.style.borderColor = inputFocusBorder)}
               onBlur={(e) => (e.target.style.borderColor = inputBorder)}
             />

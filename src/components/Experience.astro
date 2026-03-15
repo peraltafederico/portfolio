@@ -1,5 +1,4 @@
-import { useScrollReveal } from '../hooks/useGsap'
-
+---
 const jobs = [
   {
     role: 'Senior Software Engineer',
@@ -102,60 +101,37 @@ const jobs = [
     skills: ['JavaScript', 'Node.js', 'Express.js', 'React.js'],
   },
 ]
-
-export function Experience({ dark }: { dark: boolean }) {
-  const ref = useScrollReveal<HTMLElement>({ stagger: 0.15 })
-  const textColor = dark ? '#ededed' : '#171717'
-  const mutedColor = dark ? '#888' : '#666'
-  const pillBg = dark ? 'rgba(59,130,246,0.15)' : 'rgba(37,99,235,0.1)'
-  const pillColor = dark ? '#60a5fa' : '#2563eb'
-
-  return (
-    <section id="experience" ref={ref} className="py-20 lg:py-24">
-      <h2
-        className="text-sm font-medium uppercase tracking-widest mb-10"
-        style={{ color: mutedColor }}
-      >
-        Experience
-      </h2>
-      <div className="group/list space-y-10">
-        {jobs.map((job, i) => (
-          <div
-            key={i}
-            className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-1 sm:gap-6 group/item rounded-lg p-4 -mx-4 transition-all duration-200 lg:group-hover/list:opacity-50 lg:hover:!opacity-100 lg:hover:bg-white/[0.03]"
-          >
-            <span
-              className="text-xs pt-1 shrink-0 whitespace-nowrap"
-              style={{ color: mutedColor }}
-            >
-              {job.period}
-            </span>
-            <div>
-              <h3 className="font-semibold text-[15px]" style={{ color: textColor }}>
-                {job.role}
-              </h3>
-              <p className="text-sm mb-2" style={{ color: dark ? '#3b82f6' : '#2563eb' }}>
-                {job.company}{' '}
-                <span style={{ color: mutedColor }}>· {job.location}</span>
-              </p>
-              <p className="text-sm leading-relaxed mb-3" style={{ color: mutedColor }}>
-                {job.description}
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {job.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="text-[11px] font-medium px-2.5 py-1 rounded-full transition-transform duration-150 hover:scale-105"
-                    style={{ backgroundColor: pillBg, color: pillColor }}
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
+---
+<section id="experience" class="py-20 lg:py-24">
+  <h2 class="text-sm font-medium uppercase tracking-widest mb-10 text-gray-500 dark:text-gray-400">
+    Experience
+  </h2>
+  <div class="group/list space-y-10">
+    {jobs.map((job) => (
+      <div class="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-1 sm:gap-6 group/item rounded-lg p-4 -mx-4 transition-all duration-200 lg:group-hover/list:opacity-50 lg:hover:!opacity-100 lg:hover:bg-white/[0.03]">
+        <span class="text-xs pt-1 shrink-0 whitespace-nowrap text-gray-500 dark:text-gray-400">
+          {job.period}
+        </span>
+        <div>
+          <h3 class="font-semibold text-[15px] text-neutral-900 dark:text-neutral-100">
+            {job.role}
+          </h3>
+          <p class="text-sm mb-2 text-blue-600 dark:text-blue-400">
+            {job.company}{' '}
+            <span class="text-gray-500 dark:text-gray-400">&middot; {job.location}</span>
+          </p>
+          <p class="text-sm leading-relaxed mb-3 text-gray-500 dark:text-gray-400">
+            {job.description}
+          </p>
+          <div class="flex flex-wrap gap-1.5">
+            {job.skills.map((skill) => (
+              <span class="text-[11px] font-medium px-2.5 py-1 rounded-full transition-transform duration-150 hover:scale-105 bg-blue-600/10 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400">
+                {skill}
+              </span>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-    </section>
-  )
-}
+    ))}
+  </div>
+</section>
