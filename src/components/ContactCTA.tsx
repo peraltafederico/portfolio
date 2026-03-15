@@ -68,20 +68,7 @@ export function ContactCTA() {
   }, [])
 
   const handleClick = () => {
-    const root = document.getElementById('root')
-    if (!root) {
-      void navigate({ to: '/contact' })
-      return
-    }
-    gsap.to(root, {
-      opacity: 0,
-      duration: 0.3,
-      ease: 'power2.in',
-      onComplete: () => {
-        void navigate({ to: '/contact' })
-        gsap.set(root, { opacity: 1 })
-      },
-    })
+    void navigate({ to: '/contact' })
   }
 
   return (
