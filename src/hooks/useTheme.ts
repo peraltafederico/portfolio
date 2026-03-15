@@ -1,14 +1,12 @@
-import { useState, useEffect, useMemo } from 'react'
-
-function getInitialTheme(): boolean {
-  if (typeof window === 'undefined') return true
-  return localStorage.getItem('theme') !== 'light'
-}
+import { useState, useEffect } from 'react'
 
 export function useTheme() {
-  const [dark, setDark] = useState(getInitialTheme)
+  const [dark, setDark] = useState(true)
 
   useEffect(() => {
+    const isDark = document.documentElement.classList.contains('dark')
+    setDark(isDark)
+
     const observer = new MutationObserver(() => {
       setDark(document.documentElement.classList.contains('dark'))
     })
@@ -24,15 +22,5 @@ export function useTheme() {
     localStorage.setItem('theme', newDark ? 'dark' : 'light')
   }
 
-  const colors = useMemo(() => ({
-    text: dark ? '#ededed' : '#171717',
-    muted: dark ? '#888' : '#666',
-    bg: dark ? '#141414' : '#fafafa',
-    cardHover: dark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)',
-    buttonBg: dark ? '#ffffff' : '#171717',
-    buttonText: dark ? '#141414' : '#ffffff',
-    activeNav: dark ? '#ededed' : '#171717',
-  }), [dark])
-
-  return { dark, toggleTheme, colors }
+  return { dark, toggleTheme }
 }
