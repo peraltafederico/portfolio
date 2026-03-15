@@ -20,5 +20,5 @@ requestAnimationFrame(() => {
       splash.style.opacity = '0'
       splash.addEventListener('transitionend', () => splash.remove())
     }
-  }, 300)
+  }, 600)
 })
