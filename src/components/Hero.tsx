@@ -87,18 +87,6 @@ export function Hero() {
           Senior fullstack engineer who ships fast. I use AI agents (Claude Code, multi-agent orchestration) as force multipliers, automating the repetitive so I can focus on the problems that actually matter. 7+ years building production apps with TypeScript, React, and Node.js, from fintech to healthcare to developer tools.
         </p>
 
-        <a
-          data-hero="bio"
-          href="/contact"
-          className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105"
-          style={{
-            backgroundColor: dark ? '#ffffff' : '#171717',
-            color: dark ? '#141414' : '#ffffff',
-          }}
-        >
-          Get in touch
-        </a>
-
         <nav data-hero="nav" className="hidden lg:block mt-12">
           <ul className="space-y-3">
             {navItems.map(({ id, label }) => {
