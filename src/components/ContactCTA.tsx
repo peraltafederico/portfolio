@@ -1,0 +1,117 @@
+import { useEffect, useRef } from 'react'
+import { useNavigate } from '@tanstack/react-router'
+import { gsap, ScrollTrigger } from '../hooks/useGsap'
+import { useTheme } from '../layouts/RootLayout'
+
+export function ContactCTA() {
+  const { dark } = useTheme()
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const navigate = useNavigate()
+
+  const mutedColor = dark ? '#888' : '#666'
+  const textColor = dark ? '#ededed' : '#171717'
+  const buttonBorder = dark ? '#333' : '#ccc'
+
+  useEffect(() => {
+    const heading = headingRef.current
+    if (!heading) return
+
+    const text = heading.textContent || ''
+    heading.innerHTML = text
+      .split('')
+      .map((char) =>
+        char === ' '
+          ? '<span class="inline-block">&nbsp;</span>'
+          : `<span class="inline-block opacity-0">${char}</span>`
+      )
+      .join('')
+
+    const chars = heading.querySelectorAll('span')
+
+    const tween = gsap.to(chars, {
+      opacity: 1,
+      duration: 0.05,
+      stagger: 0.04,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 75%',
+        once: true,
+      },
+    })
+
+    return () => {
+      tween.scrollTrigger?.kill()
+      tween.kill()
+    }
+  }, [])
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const subtitle = section.querySelector('[data-cta="subtitle"]')
+    const button = section.querySelector('[data-cta="button"]')
+
+    const trigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top 75%',
+      once: true,
+      onEnter: () => {
+        gsap.from(subtitle, { opacity: 0, y: 20, duration: 0.8, delay: 0.5, ease: 'power3.out' })
+        gsap.from(button, { opacity: 0, y: 20, duration: 0.8, delay: 0.7, ease: 'power3.out' })
+      },
+    })
+
+    return () => trigger.kill()
+  }, [])
+
+  const handleClick = () => {
+    const root = document.getElementById('root')
+    if (!root) {
+      void navigate({ to: '/contact' })
+      return
+    }
+    gsap.to(root, {
+      opacity: 0,
+      duration: 0.3,
+      ease: 'power2.in',
+      onComplete: () => {
+        void navigate({ to: '/contact' })
+        gsap.set(root, { opacity: 1 })
+      },
+    })
+  }
+
+  return (
+    <section ref={sectionRef} className="py-32 lg:py-40">
+      <h2
+        ref={headingRef}
+        className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight"
+        style={{ color: textColor }}
+      >
+        Let's talk
+      </h2>
+      <p
+        data-cta="subtitle"
+        className="text-base sm:text-lg mt-6 max-w-md leading-relaxed"
+        style={{ color: mutedColor }}
+      >
+        Have a project in mind? Looking for a senior engineer? Drop me a message.
+      </p>
+      <button
+        data-cta="button"
+        onClick={handleClick}
+        className="mt-10 px-8 py-3 text-sm font-medium tracking-wide rounded-full border transition-all duration-200 hover:scale-105 cursor-pointer"
+        style={{
+          color: textColor,
+          borderColor: buttonBorder,
+          backgroundColor: 'transparent',
+        }}
+      >
+        Get in touch
+      </button>
+    </section>
+  )
+}
