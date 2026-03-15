@@ -1,0 +1,152 @@
+---
+const navItems = [
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'contact', label: 'Contact' },
+]
+---
+
+<header
+  id="hero-container"
+  class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24 pt-24 pb-12"
+>
+  <div>
+    <h1
+      data-hero="name"
+      class="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100"
+    >
+      Federico Peralta
+    </h1>
+    <p data-hero="title" class="text-lg mt-3 text-[#666] dark:text-[#888]">
+      Senior Software Engineer
+    </p>
+    <p
+      data-hero="bio"
+      class="text-sm leading-relaxed mt-4 max-w-xs text-[#555] dark:text-[#a0a0a0]"
+    >
+      Senior fullstack engineer who ships fast. I use AI agents (Claude Code, multi-agent orchestration) as force multipliers, automating the repetitive so I can focus on the problems that actually matter. 7+ years building production apps with TypeScript, React, and Node.js, from fintech to healthcare to developer tools.
+    </p>
+
+    <nav data-hero="nav" class="hidden lg:block mt-12">
+      <ul class="space-y-3">
+        {navItems.map(({ id, label }) => (
+          <li>
+            <a
+              href={`#${id}`}
+              data-nav-link={id}
+              class="group flex items-center gap-3 text-xs font-medium uppercase tracking-widest transition-all duration-200 text-[#666] dark:text-[#888] hover:text-neutral-900 dark:hover:text-neutral-100"
+            >
+              <span
+                class="inline-block h-px w-8 transition-all duration-200 bg-[#666] dark:bg-[#888] group-hover:w-16 group-hover:bg-neutral-900 dark:group-hover:bg-neutral-100"
+              />
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+
+  <div data-hero="links" class="flex items-center gap-4 mt-8 lg:mt-0">
+    <a
+      href="/contact"
+      class="inline-flex items-center px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 hover:scale-105 lg:hidden bg-neutral-900 dark:bg-white text-white dark:text-neutral-900"
+    >
+      Get in touch
+    </a>
+    <a
+      href="https://github.com/peraltafederico"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="transition-all duration-200 hover:scale-110 text-[#666] dark:text-[#888]"
+      aria-label="GitHub"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+    </a>
+    <a
+      href="https://linkedin.com/in/peralta-federico"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="transition-all duration-200 hover:scale-110 text-[#666] dark:text-[#888]"
+      aria-label="LinkedIn"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a
+      href="https://www.instagram.com/_pfederico/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="transition-all duration-200 hover:scale-110 text-[#666] dark:text-[#888]"
+      aria-label="Instagram"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+    </a>
+    <a
+      href="/contact"
+      class="transition-all duration-200 hover:scale-110 text-[#666] dark:text-[#888]"
+      aria-label="Contact"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    </a>
+  </div>
+</header>
+
+<script>
+  import gsap from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  const sections = ['about', 'experience', 'skills', 'contact'] as const
+
+  function setActive(id: string) {
+    document.querySelectorAll('[data-nav-link]').forEach((link) => {
+      const el = link as HTMLElement
+      const span = el.querySelector('span')!
+      if (el.dataset.navLink === id) {
+        el.classList.remove('text-[#666]', 'dark:text-[#888]')
+        el.classList.add('text-neutral-900', 'dark:text-neutral-100')
+        span.classList.remove('w-8', 'bg-[#666]', 'dark:bg-[#888]')
+        span.classList.add('w-16', 'bg-neutral-900', 'dark:bg-neutral-100')
+      } else {
+        el.classList.add('text-[#666]', 'dark:text-[#888]')
+        el.classList.remove('text-neutral-900', 'dark:text-neutral-100')
+        span.classList.add('w-8', 'bg-[#666]', 'dark:bg-[#888]')
+        span.classList.remove('w-16', 'bg-neutral-900', 'dark:bg-neutral-100')
+      }
+    })
+  }
+
+  sections.forEach((id) => {
+    ScrollTrigger.create({
+      trigger: `#${id}`,
+      start: 'top center',
+      end: 'bottom center',
+      onEnter: () => setActive(id),
+      onEnterBack: () => setActive(id),
+    })
+  })
+
+  const container = document.getElementById('hero-container')!
+  const name = container.querySelector('[data-hero="name"]')
+  const title = container.querySelector('[data-hero="title"]')
+  const bio = container.querySelector('[data-hero="bio"]')
+  const nav = container.querySelector('[data-hero="nav"]')
+  const links = container.querySelector('[data-hero="links"]')
+
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.6 } })
+  tl.fromTo(name, { opacity: 0, y: 20 }, { opacity: 1, y: 0 })
+    .fromTo(title, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
+    .fromTo(bio, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
+    .fromTo(nav, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
+    .fromTo(links, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
+
+  document.querySelectorAll('[data-nav-link]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault()
+      const id = (link as HTMLElement).dataset.navLink!
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    })
+  })
+</script>

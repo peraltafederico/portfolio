@@ -1,0 +1,27 @@
+---
+---
+
+<div id="mouse-spotlight" class="pointer-events-none fixed inset-0 z-40 transition-opacity duration-300"></div>
+
+<script>
+  const el = document.getElementById('mouse-spotlight')!
+
+  function getColor() {
+    const isDark = document.documentElement.classList.contains('dark')
+    return isDark ? 'rgba(100, 100, 255, 0.06)' : 'rgba(80, 80, 200, 0.08)'
+  }
+
+  let raf = 0
+
+  window.addEventListener('mousemove', (e) => {
+    cancelAnimationFrame(raf)
+    raf = requestAnimationFrame(() => {
+      el.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, ${getColor()}, transparent 80%)`
+    })
+  })
+
+  document.addEventListener('mouseleave', () => {
+    cancelAnimationFrame(raf)
+    el.style.background = 'transparent'
+  })
+</script>

@@ -1,27 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { Hero } from '../components/Hero'
+import Hero from '../components/Hero.astro'
 import About from '../components/About.astro'
 import Experience from '../components/Experience.astro'
 import Skills from '../components/Skills.astro'
-import { ContactCTA } from '../components/ContactCTA'
+import ContactCTA from '../components/ContactCTA.astro'
 import Footer from '../components/Footer.astro'
-import { MouseSpotlight } from '../components/MouseSpotlight'
-import { ThemeToggle } from '../components/ThemeToggle'
+import MouseSpotlight from '../components/MouseSpotlight.astro'
+import ThemeToggle from '../components/ThemeToggle.astro'
 import '../styles/global.css'
 ---
 
 <Layout>
-  <MouseSpotlight client:load />
-  <ThemeToggle client:load />
+  <MouseSpotlight />
+  <ThemeToggle />
   <div class="min-h-screen px-6 md:px-12 lg:px-24">
     <div class="mx-auto max-w-screen-xl lg:flex lg:justify-between lg:gap-16">
-      <Hero client:load />
+      <Hero />
       <main class="lg:w-1/2 lg:py-24 pb-24">
         <About />
         <Experience />
         <Skills />
-        <ContactCTA client:load />
+        <ContactCTA />
         <Footer />
       </main>
     </div>

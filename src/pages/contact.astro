@@ -1,13 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { ContactForm } from '../components/ContactForm'
-import { MouseSpotlight } from '../components/MouseSpotlight'
-import { ThemeToggle } from '../components/ThemeToggle'
+import ContactForm from '../components/ContactForm.astro'
+import MouseSpotlight from '../components/MouseSpotlight.astro'
+import ThemeToggle from '../components/ThemeToggle.astro'
 import '../styles/global.css'
 ---
 
 <Layout>
-  <MouseSpotlight client:load />
-  <ThemeToggle client:load />
-  <ContactForm client:load />
+  <MouseSpotlight />
+  <ThemeToggle />
+  <ContactForm />
 </Layout>

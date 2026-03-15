@@ -4,9 +4,9 @@
 Personal portfolio for Federico Peralta (federicoperalta.com)
 
 ## Stack
-- **Framework:** Astro with React islands
+- **Framework:** Astro (pure .astro components + vanilla JS `<script>` tags)
 - **Styling:** Tailwind CSS v4 + custom dark/light theme via `html.dark`/`html.light` class
-- **Animations:** GSAP + ScrollTrigger
+- **Animations:** GSAP + ScrollTrigger (imported in bundled `<script>` tags)
 - **Backend:** Astro API routes on Cloudflare Workers
 - **Email:** Resend (contact form)
 - **Deploy:** Cloudflare Workers via `npx wrangler deploy`
@@ -16,22 +16,19 @@ Personal portfolio for Federico Peralta (federicoperalta.com)
 src/
   layouts/Layout.astro     # Base HTML layout (meta tags, splash, scripts)
   pages/
-    index.astro            # Homepage (static)
-    contact.astro          # Contact page (static)
+    index.astro            # Homepage
+    contact.astro          # Contact page
     api/contact.ts         # POST /api/contact (Resend email, server-side)
   components/
     About.astro            # Pure static (zero JS)
     Experience.astro       # Pure static (zero JS)
     Skills.astro           # Pure static (zero JS)
     Footer.astro           # Pure static (zero JS)
-    Hero.tsx               # React island (GSAP animations, nav)
-    ContactCTA.tsx         # React island (GSAP letter animation, navigation)
-    ContactForm.tsx        # React island (form state, submit)
-    MouseSpotlight.tsx     # React island (mousemove listener)
-    ThemeToggle.tsx        # React island (localStorage theme)
-  hooks/
-    useGsap.ts             # GSAP + ScrollTrigger setup
-    useTheme.ts            # Theme hook (reads DOM class, MutationObserver)
+    Hero.astro             # GSAP stagger animations, scrollspy nav, smooth scroll
+    ContactCTA.astro       # GSAP letter-by-letter animation on scroll
+    ContactForm.astro      # Form with loading/success/error states, company pills
+    MouseSpotlight.astro   # Radial gradient following mouse cursor
+    ThemeToggle.astro      # Dark/light toggle (localStorage + html class)
   styles/global.css        # Tailwind + dark mode + GSAP initial states
 public/
   favicon.svg              # "fp" italic logo
@@ -40,20 +37,20 @@ public/
 
 ## Key Concepts
 
-### Static vs Interactive
-- `.astro` components = pure HTML, zero JS sent to browser
-- `.tsx` components with `client:load` = React hydrated in browser
-- Only use React when interactivity is needed (GSAP, state, events)
+### All Components Are .astro
+- Every component is a `.astro` file. No React, no client directives.
+- Interactive behavior uses `<script>` tags (bundled by Astro/Vite, supports ES imports).
+- Icons are inline SVGs (from Lucide icon set).
 
 ### Theme System
 - Dark/light via `html` class (`dark`/`light`)
-- Static components use Tailwind `dark:` variants
-- React components use `useTheme()` hook (MutationObserver on `html` class)
+- All components use Tailwind `dark:` variants
 - Blocking `<script is:inline>` in Layout.astro reads localStorage before paint
+- ThemeToggle.astro toggles the class and saves to localStorage
 
 ### Splash Screen
 - "fp" in italic, shows on first visit only (sessionStorage flag)
-- Managed entirely in Layout.astro with inline scripts (no React)
+- Managed entirely in Layout.astro with inline scripts
 
 ## Rules
 - NEVER use em dashes anywhere. Use commas or periods instead.
