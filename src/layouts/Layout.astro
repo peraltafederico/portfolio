@@ -64,6 +64,10 @@
     <script is:inline>
       (function() {
         var splash = document.getElementById('splash');
+        if (sessionStorage.getItem('splashShown')) {
+          if (splash) splash.remove();
+          return;
+        }
         var isLight = document.documentElement.classList.contains('light');
         if (splash) {
           splash.style.backgroundColor = isLight ? '#ffffff' : '#141414';
@@ -73,7 +77,10 @@
           setTimeout(function() {
             if (splash) {
               splash.style.opacity = '0';
-              splash.addEventListener('transitionend', function() { splash.remove(); });
+              splash.addEventListener('transitionend', function() {
+                splash.remove();
+                sessionStorage.setItem('splashShown', '1');
+              });
             }
           }, 300);
         });
