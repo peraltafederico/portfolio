@@ -30,7 +30,7 @@ export function RootLayout() {
     const el = spotlightRef.current
     if (!el) return
 
-    const color = dark ? 'rgba(100, 100, 255, 0.06)' : 'rgba(100, 100, 255, 0.04)'
+    const color = dark ? 'rgba(100, 100, 255, 0.06)' : 'rgba(80, 80, 200, 0.08)'
 
     let raf = 0
     const onMove = (e: MouseEvent) => {
