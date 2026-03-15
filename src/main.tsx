@@ -9,3 +9,16 @@ createRoot(document.getElementById('root')!).render(
     <RouterProvider router={router} />
   </StrictMode>,
 )
+
+// Remove splash screen after hydration
+requestAnimationFrame(() => {
+  setTimeout(() => {
+    const splash = document.getElementById('splash')
+    const root = document.getElementById('root')
+    if (root) root.style.opacity = '1'
+    if (splash) {
+      splash.style.opacity = '0'
+      splash.addEventListener('transitionend', () => splash.remove())
+    }
+  }, 300)
+})

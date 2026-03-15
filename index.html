@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Federico Peralta - Senior Fullstack Engineer</title>
     <meta name="description" content="Senior fullstack engineer with 7+ years shipping production software. AI-first workflow with multi-agent orchestration." />
@@ -37,7 +38,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="splash" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 0.4s ease-out;">
+      <span style="font-family:'Inter',system-ui,sans-serif;font-size:3rem;font-weight:700;letter-spacing:-0.02em;opacity:0;animation:splash-fade-in 0.4s ease-out 0.1s forwards;">FP</span>
+    </div>
+    <style>
+      @keyframes splash-fade-in {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+    </style>
+    <script>
+      (function() {
+        var splash = document.getElementById('splash');
+        var isLight = document.documentElement.classList.contains('light');
+        if (splash) {
+          splash.style.backgroundColor = isLight ? '#ffffff' : '#141414';
+          splash.querySelector('span').style.color = isLight ? '#171717' : '#ededed';
+        }
+      })();
+    </script>
+    <div id="root" style="opacity:0;transition:opacity 0.3s ease-in;"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
