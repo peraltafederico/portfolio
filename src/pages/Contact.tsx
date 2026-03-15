@@ -1,10 +1,20 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { ArrowLeft, Check } from 'lucide-react'
+import { ArrowLeft, Check, Sun, Moon } from 'lucide-react'
 import { gsap } from '../hooks/useGsap'
 import { useTheme } from '../layouts/RootLayout'
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
+
+const companies = [
+  'Pager Health',
+  'Stateful',
+  'ReachSuite.io',
+  'Fusebit',
+  'Molo Marine',
+  'Banco del Sol',
+  'Swiss Medical',
+]
 
 export function Contact() {
   const { dark, setDark } = useTheme()
@@ -12,6 +22,7 @@ export function Contact() {
   const pageRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
   const successRef = useRef<HTMLDivElement>(null)
+  const pillsRef = useRef<HTMLDivElement>(null)
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -26,6 +37,8 @@ export function Contact() {
   const inputFocusBorder = dark ? '#555' : '#999'
   const buttonBg = dark ? '#ededed' : '#171717'
   const buttonText = dark ? '#141414' : '#fafafa'
+  const pillBg = dark ? '#1a1a1a' : '#f5f5f5'
+  const pillBorder = dark ? '#2a2a2a' : '#e0e0e0'
 
   // Page fade-in
   useEffect(() => {
@@ -44,6 +57,19 @@ export function Contact() {
       fields,
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.2, ease: 'power3.out' }
+    )
+  }, [])
+
+  // Stagger company pills
+  useEffect(() => {
+    const container = pillsRef.current
+    if (!container) return
+
+    const pills = container.querySelectorAll('[data-pill]')
+    gsap.fromTo(
+      pills,
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, delay: 0.6, ease: 'power3.out' }
     )
   }, [])
 
@@ -115,9 +141,9 @@ export function Contact() {
   }) as React.CSSProperties
 
   return (
-    <div ref={pageRef} className="min-h-screen px-6 md:px-12 lg:px-24">
-      <div className="mx-auto max-w-lg py-16 sm:py-24">
-        <div className="flex items-center justify-between mb-16" data-field>
+    <div ref={pageRef} className="min-h-screen flex flex-col px-6 md:px-12 lg:px-24">
+      <div className="mx-auto max-w-lg w-full flex-1 flex flex-col justify-center py-12">
+        <div className="flex items-center justify-between mb-12" data-field>
           <button
             onClick={handleBack}
             className="flex items-center gap-2 text-sm transition-all duration-200 hover:opacity-70 cursor-pointer"
@@ -128,10 +154,10 @@ export function Contact() {
           </button>
           <button
             onClick={() => setDark(!dark)}
-            className="text-xs font-medium uppercase tracking-widest transition-all duration-200 hover:opacity-70 cursor-pointer"
+            className="transition-all duration-200 hover:opacity-70 cursor-pointer"
             style={{ color: mutedColor }}
           >
-            {dark ? 'Light' : 'Dark'}
+            {dark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
         </div>
 
@@ -150,7 +176,7 @@ export function Contact() {
           I'll get back to you as soon as I can.
         </p>
 
-        <form ref={formRef} onSubmit={handleSubmit} className="mt-12 space-y-6">
+        <form ref={formRef} onSubmit={handleSubmit} className="mt-10 space-y-5">
           <div data-field>
             <label className="block text-xs font-medium uppercase tracking-widest mb-2" style={{ color: mutedColor }}>
               Name
@@ -191,7 +217,7 @@ export function Contact() {
             </label>
             <textarea
               required
-              rows={5}
+              rows={4}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Tell me about your project..."
@@ -234,6 +260,31 @@ export function Contact() {
           <p className="text-xl font-medium" style={{ color: textColor }}>
             Got it! I'll get back to you soon.
           </p>
+        </div>
+
+        <div ref={pillsRef} className="mt-10 text-center">
+          <p
+            className="text-xs font-medium uppercase tracking-widest mb-4"
+            style={{ color: mutedColor }}
+          >
+            Companies I've worked with
+          </p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {companies.map((company) => (
+              <span
+                key={company}
+                data-pill
+                className="px-3 py-1.5 rounded-full text-xs font-medium"
+                style={{
+                  backgroundColor: pillBg,
+                  border: `1px solid ${pillBorder}`,
+                  color: mutedColor,
+                }}
+              >
+                {company}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
