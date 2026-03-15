@@ -63,7 +63,7 @@ export function Hero({ dark, onToggle, activeSection, onNav }: HeroProps) {
           className="text-sm leading-relaxed mt-4 max-w-xs"
           style={{ color: dark ? '#a0a0a0' : '#555' }}
         >
-          Senior fullstack engineer who ships fast. I use AI agents (Claude Code, multi-agent orchestration) as force multipliers, automating the repetitive so I can focus on the problems that actually matter. Language agnostic: TypeScript, Go, Python, whatever the problem needs. 7+ years building production apps, from fintech to healthcare to developer tools.
+          Senior fullstack engineer who ships fast. I use AI agents (Claude Code, multi-agent orchestration) as force multipliers, automating the repetitive so I can focus on the problems that actually matter. 7+ years building production apps with TypeScript, React, and Node.js, from fintech to healthcare to developer tools.
         </p>
 
         <nav data-hero="nav" className="hidden lg:block mt-12">
