@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { ArrowLeft, Check } from 'lucide-react'
 import { gsap } from '../hooks/useGsap'
-import { useTheme } from '../hooks/useTheme'
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -16,7 +15,6 @@ const companies = [
 ]
 
 export function ContactForm() {
-  const { dark } = useTheme()
   const pageRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
   const successRef = useRef<HTMLDivElement>(null)
@@ -27,18 +25,6 @@ export function ContactForm() {
   const [message, setMessage] = useState('')
   const [status, setStatus] = useState<FormStatus>('idle')
   const [errorMessage, setErrorMessage] = useState('')
-
-  const textColor = dark ? '#ededed' : '#171717'
-  const mutedColor = dark ? '#888' : '#666'
-  const inputBg = dark ? '#1a1a1a' : '#fff'
-  const inputBorder = dark ? '#2a2a2a' : '#e0e0e0'
-  const inputFocusBorder = dark ? '#555' : '#999'
-  const buttonBg = dark ? '#ededed' : '#171717'
-  const buttonText = dark ? '#141414' : '#fafafa'
-  const pillBg = dark ? '#1a1a1a' : '#f5f5f5'
-  const pillBorder = dark ? '#2a2a2a' : '#e0e0e0'
-
-  
 
   useEffect(() => {
     if (status !== 'success') return
@@ -98,7 +84,7 @@ export function ContactForm() {
     }
   }
 
-  const inputClasses = 'w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-200'
+  const inputClasses = 'w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-200 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#2a2a2a] text-neutral-900 dark:text-neutral-100 focus:border-[#999] dark:focus:border-[#555]'
 
   return (
     <div ref={pageRef} className="min-h-screen flex flex-col px-6 md:px-12 lg:px-24">
@@ -106,8 +92,7 @@ export function ContactForm() {
         <div className="flex items-center justify-between mb-12" data-field>
           <button
             onClick={handleBack}
-            className="flex items-center gap-2 text-sm transition-all duration-200 hover:opacity-70 cursor-pointer"
-            style={{ color: mutedColor }}
+            className="flex items-center gap-2 text-sm transition-all duration-200 hover:opacity-70 cursor-pointer text-[#666] dark:text-[#888]"
           >
             <ArrowLeft size={16} />
             Back
@@ -115,15 +100,13 @@ export function ContactForm() {
         </div>
 
         <h1
-          className="text-4xl sm:text-5xl font-bold tracking-tight"
-          style={{ color: textColor }}
+          className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100"
           data-field
         >
           Let's talk
         </h1>
         <p
-          className="text-base mt-4 leading-relaxed"
-          style={{ color: mutedColor }}
+          className="text-base mt-4 leading-relaxed text-[#666] dark:text-[#888]"
           data-field
         >
           I'll get back to you as soon as I can.
@@ -131,7 +114,7 @@ export function ContactForm() {
 
         <form ref={formRef} onSubmit={handleSubmit} className="mt-10 space-y-5">
           <div data-field>
-            <label className="block text-xs font-medium uppercase tracking-widest mb-2" style={{ color: mutedColor }}>
+            <label className="block text-xs font-medium uppercase tracking-widest mb-2 text-[#666] dark:text-[#888]">
               Name
             </label>
             <input
@@ -141,18 +124,11 @@ export function ContactForm() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Your name"
               className={inputClasses}
-              style={{
-                backgroundColor: inputBg,
-                border: `1px solid ${inputBorder}`,
-                color: textColor,
-              }}
-              onFocus={(e) => (e.target.style.borderColor = inputFocusBorder)}
-              onBlur={(e) => (e.target.style.borderColor = inputBorder)}
             />
           </div>
 
           <div data-field>
-            <label className="block text-xs font-medium uppercase tracking-widest mb-2" style={{ color: mutedColor }}>
+            <label className="block text-xs font-medium uppercase tracking-widest mb-2 text-[#666] dark:text-[#888]">
               Email
             </label>
             <input
@@ -162,18 +138,11 @@ export function ContactForm() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
               className={inputClasses}
-              style={{
-                backgroundColor: inputBg,
-                border: `1px solid ${inputBorder}`,
-                color: textColor,
-              }}
-              onFocus={(e) => (e.target.style.borderColor = inputFocusBorder)}
-              onBlur={(e) => (e.target.style.borderColor = inputBorder)}
             />
           </div>
 
           <div data-field>
-            <label className="block text-xs font-medium uppercase tracking-widest mb-2" style={{ color: mutedColor }}>
+            <label className="block text-xs font-medium uppercase tracking-widest mb-2 text-[#666] dark:text-[#888]">
               Message
             </label>
             <textarea
@@ -183,18 +152,11 @@ export function ContactForm() {
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Tell me about your project..."
               className={`${inputClasses} resize-none`}
-              style={{
-                backgroundColor: inputBg,
-                border: `1px solid ${inputBorder}`,
-                color: textColor,
-              }}
-              onFocus={(e) => (e.target.style.borderColor = inputFocusBorder)}
-              onBlur={(e) => (e.target.style.borderColor = inputBorder)}
             />
           </div>
 
           {status === 'error' && (
-            <p className="text-sm" style={{ color: '#ef4444' }} data-field>
+            <p className="text-sm text-red-500" data-field>
               {errorMessage}
             </p>
           )}
@@ -203,8 +165,7 @@ export function ContactForm() {
             <button
               type="submit"
               disabled={status === 'submitting'}
-              className="w-full py-3 rounded-lg text-sm font-medium transition-all duration-200 hover:opacity-90 disabled:opacity-50 cursor-pointer"
-              style={{ backgroundColor: buttonBg, color: buttonText }}
+              className="w-full py-3 rounded-lg text-sm font-medium transition-all duration-200 hover:opacity-90 disabled:opacity-50 cursor-pointer bg-neutral-900 dark:bg-neutral-100 text-neutral-50 dark:text-neutral-900"
             >
               {status === 'submitting' ? 'Sending...' : 'Send message'}
             </button>
@@ -217,20 +178,18 @@ export function ContactForm() {
           style={{ display: 'none' }}
         >
           <div
-            className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
-            style={{ backgroundColor: dark ? '#1a2e1a' : '#e8f5e8' }}
+            className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 bg-[#e8f5e8] dark:bg-[#1a2e1a]"
           >
-            <Check size={28} style={{ color: '#22c55e' }} />
+            <Check size={28} className="text-green-500" />
           </div>
-          <p className="text-xl font-medium" style={{ color: textColor }}>
+          <p className="text-xl font-medium text-neutral-900 dark:text-neutral-100">
             Got it! I'll get back to you soon.
           </p>
         </div>
 
         <div ref={pillsRef} className="mt-10 text-center">
           <p
-            className="text-xs font-medium uppercase tracking-widest mb-4"
-            style={{ color: mutedColor }}
+            className="text-xs font-medium uppercase tracking-widest mb-4 text-[#666] dark:text-[#888]"
           >
             Companies I've worked with
           </p>
@@ -239,12 +198,7 @@ export function ContactForm() {
               <span
                 key={company}
                 data-pill
-                className="px-3 py-1.5 rounded-full text-xs font-medium"
-                style={{
-                  backgroundColor: pillBg,
-                  border: `1px solid ${pillBorder}`,
-                  color: mutedColor,
-                }}
+                className="px-3 py-1.5 rounded-full text-xs font-medium bg-neutral-100 dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#2a2a2a] text-[#666] dark:text-[#888]"
               >
                 {company}
               </span>

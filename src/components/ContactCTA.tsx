@@ -1,15 +1,9 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from '../hooks/useGsap'
-import { useTheme } from '../hooks/useTheme'
 
 export function ContactCTA() {
-  const { dark } = useTheme()
   const headingRef = useRef<HTMLHeadingElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
-
-  const mutedColor = dark ? '#888' : '#666'
-  const textColor = dark ? '#ededed' : '#171717'
-  const buttonBorder = dark ? '#333' : '#ccc'
 
   useEffect(() => {
     const heading = headingRef.current
@@ -49,25 +43,18 @@ export function ContactCTA() {
     <section id="contact" ref={sectionRef} className="py-32 lg:py-40">
       <h2
         ref={headingRef}
-        className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight"
-        style={{ color: textColor }}
+        className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100"
       >
         Let's talk
       </h2>
       <p
-        className="text-base sm:text-lg mt-6 max-w-md leading-relaxed"
-        style={{ color: mutedColor }}
+        className="text-base sm:text-lg mt-6 max-w-md leading-relaxed text-[#666] dark:text-[#888]"
       >
         Have a project in mind? Looking for a senior engineer? Drop me a message.
       </p>
       <a
         href="/contact"
-        className="inline-block mt-10 px-8 py-3 text-sm font-medium tracking-wide rounded-full border transition-all duration-200 hover:scale-105"
-        style={{
-          color: textColor,
-          borderColor: buttonBorder,
-          backgroundColor: 'transparent',
-        }}
+        className="inline-block mt-10 px-8 py-3 text-sm font-medium tracking-wide rounded-full border transition-all duration-200 hover:scale-105 text-neutral-900 dark:text-neutral-100 border-[#ccc] dark:border-[#333] bg-transparent"
       >
         Get in touch
       </a>
