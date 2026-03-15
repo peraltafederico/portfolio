@@ -137,14 +137,14 @@ const navItems = [
   const container = document.getElementById('hero-container')!
   const name = container.querySelector('[data-hero="name"]')
   const title = container.querySelector('[data-hero="title"]')
-  const bio = container.querySelector('[data-hero="bio"]')
+  const bios = container.querySelectorAll('[data-hero="bio"]')
   const nav = container.querySelector('[data-hero="nav"]')
   const links = container.querySelector('[data-hero="links"]')
 
   const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.6 } })
   tl.fromTo(name, { opacity: 0, y: 20 }, { opacity: 1, y: 0 })
     .fromTo(title, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
-    .fromTo(bio, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
+    .fromTo(bios, { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.1 }, '-=0.5')
     .fromTo(nav, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
     .fromTo(links, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
 
