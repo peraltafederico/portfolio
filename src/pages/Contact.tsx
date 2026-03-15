@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { ArrowLeft, Check, Sun, Moon } from 'lucide-react'
+import { ArrowLeft, Check } from 'lucide-react'
 import { gsap } from '../hooks/useGsap'
 import { useTheme } from '../layouts/RootLayout'
 
@@ -17,7 +17,7 @@ const companies = [
 ]
 
 export function Contact() {
-  const { dark, setDark } = useTheme()
+  const { dark } = useTheme()
   const navigate = useNavigate()
   const pageRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
@@ -151,13 +151,6 @@ export function Contact() {
           >
             <ArrowLeft size={16} />
             Back
-          </button>
-          <button
-            onClick={() => setDark(!dark)}
-            className="transition-all duration-200 hover:opacity-70 cursor-pointer"
-            style={{ color: mutedColor }}
-          >
-            {dark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
         </div>
 
