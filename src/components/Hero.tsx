@@ -33,11 +33,11 @@ export function Hero({ dark, activeSection, onNav }: HeroProps) {
     const links = el.querySelector('[data-hero="links"]')
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.6 } })
-    tl.from(name, { opacity: 0, y: 20 })
-      .from(title, { opacity: 0, y: 20 }, '-=0.5')
-      .from(bio, { opacity: 0, y: 20 }, '-=0.5')
-      .from(nav, { opacity: 0, y: 20 }, '-=0.5')
-      .from(links, { opacity: 0, y: 20 }, '-=0.5')
+    tl.fromTo(name, { opacity: 0, y: 20 }, { opacity: 1, y: 0 })
+      .fromTo(title, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
+      .fromTo(bio, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
+      .fromTo(nav, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
+      .fromTo(links, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
 
     return () => { tl.kill() }
   }, [])

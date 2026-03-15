@@ -24,3 +24,12 @@ body {
   background-color: #fafafa;
   color: #171717;
 }
+
+/* Prevent layout shift: elements animated by GSAP start hidden */
+[data-hero="name"],
+[data-hero="title"],
+[data-hero="bio"],
+[data-hero="nav"],
+[data-hero="links"] {
+  opacity: 0;
+}
