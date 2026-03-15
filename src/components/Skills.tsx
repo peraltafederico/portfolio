@@ -1,12 +1,25 @@
 import { useScrollReveal } from '../hooks/useGsap'
 
 const skills = [
-  'TypeScript', 'React', 'Node.js', 'Next.js', 'React Native',
-  'PostgreSQL', 'GraphQL', 'AWS', 'GCP', 'Terraform',
-  'Kubernetes', 'Docker', 'Cloudflare Workers', 'Supabase',
-  'Auth0', 'NestJS', 'Express', 'Tailwind CSS', 'AI/LLM Integration',
+  // AI
   'Claude Code', 'Multi-Agent Orchestration', 'OpenAI API', 'Gemini API',
   'Prompt Engineering', 'Vercel AI SDK', 'RAG',
+  // Frontend
+  'TypeScript', 'React', 'React Native', 'Next.js', 'Styled Components',
+  'CSS', 'Tailwind CSS', 'React Query / TanStack', 'Apollo Client',
+  // Backend
+  'Node.js', 'Express', 'NestJS', 'GraphQL', 'WebSockets',
+  'Apollo Server', 'Prisma', 'SignalR',
+  // Databases
+  'PostgreSQL', 'MySQL', 'MongoDB', 'Supabase', 'Redis',
+  // Cloud & Infra
+  'AWS', 'GCP', 'Cloudflare Workers', 'EKS', 'Kubernetes',
+  'Istio', 'Karpenter', 'Docker', 'Terraform',
+  // Auth & Payments
+  'Auth0', 'Stripe',
+  // Testing & CI/CD
+  'Unit Testing', 'Jest', 'Mocha', 'Playwright',
+  'GitHub Actions', 'GitLab CI',
 ]
 
 export function Skills({ dark }: { dark: boolean }) {
