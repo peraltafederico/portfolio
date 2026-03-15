@@ -119,10 +119,10 @@ export function Hero({ dark, onToggle, activeSection, onNav }: HeroProps) {
           <Linkedin size={18} />
         </a>
         <a
-          href="mailto:peralta.federico.manuel@gmail.com"
+          href="/contact"
           className="transition-all duration-200 hover:scale-110"
           style={{ color: mutedColor }}
-          aria-label="Email"
+          aria-label="Contact"
         >
           <Mail size={18} />
         </a>
