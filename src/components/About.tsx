@@ -6,7 +6,7 @@ export function About({ dark }: { dark: boolean }) {
   const textColor = dark ? '#a0a0a0' : '#555'
 
   return (
-    <section id="about" ref={ref} className="py-20 lg:py-24">
+    <section id="about" ref={ref} className="pb-20 lg:pb-24">
       <h2 className="text-sm font-medium uppercase tracking-widest mb-10" style={{ color: mutedColor }}>
         About
       </h2>
