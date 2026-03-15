@@ -108,28 +108,28 @@ const jobs = [
   </h2>
   <div class="group/list space-y-10">
     {jobs.map((job) => (
-      <div class="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-1 sm:gap-6 group/item rounded-lg p-4 -mx-4 transition-all duration-200 lg:group-hover/list:opacity-50 lg:hover:!opacity-100 lg:hover:bg-white/[0.03]">
-        <span class="text-xs pt-1 shrink-0 whitespace-nowrap text-gray-500 dark:text-gray-400">
-          {job.period}
-        </span>
-        <div>
+      <div class="group/item rounded-lg p-4 -mx-4 transition-all duration-200 lg:group-hover/list:opacity-50 lg:hover:!opacity-100 lg:hover:bg-white/[0.03]">
+        <div class="flex items-baseline justify-between gap-4 mb-1">
           <h3 class="font-semibold text-[15px] text-neutral-900 dark:text-neutral-100">
             {job.role}
           </h3>
-          <p class="text-sm mb-2 text-blue-600 dark:text-blue-400">
-            {job.company}{' '}
-            <span class="text-gray-500 dark:text-gray-400">&middot; {job.location}</span>
-          </p>
-          <p class="text-sm leading-relaxed mb-3 text-gray-500 dark:text-gray-400">
-            {job.description}
-          </p>
-          <div class="flex flex-wrap gap-1.5">
-            {job.skills.map((skill) => (
-              <span class="text-[11px] font-medium px-2.5 py-1 rounded-full transition-transform duration-150 hover:scale-105 bg-blue-600/10 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400">
-                {skill}
-              </span>
-            ))}
-          </div>
+          <span class="text-xs shrink-0 whitespace-nowrap text-gray-500 dark:text-gray-400">
+            {job.period}
+          </span>
+        </div>
+        <p class="text-sm mb-2 text-blue-600 dark:text-blue-400">
+          {job.company}{' '}
+          <span class="text-gray-500 dark:text-gray-400">&middot; {job.location}</span>
+        </p>
+        <p class="text-sm leading-relaxed mb-3 text-gray-500 dark:text-gray-400">
+          {job.description}
+        </p>
+        <div class="flex flex-wrap gap-1.5">
+          {job.skills.map((skill) => (
+            <span class="text-[11px] font-medium px-2.5 py-1 rounded-full transition-transform duration-150 hover:scale-105 bg-blue-600/10 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400">
+              {skill}
+            </span>
+          ))}
         </div>
       </div>
     ))}
