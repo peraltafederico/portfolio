@@ -5,6 +5,8 @@ const skills = [
   'PostgreSQL', 'GraphQL', 'AWS', 'GCP', 'Terraform',
   'Kubernetes', 'Docker', 'Cloudflare Workers', 'Supabase',
   'Auth0', 'NestJS', 'Express', 'Tailwind CSS', 'AI/LLM Integration',
+  'Claude Code', 'Multi-Agent Orchestration', 'OpenAI API', 'Gemini API',
+  'Prompt Engineering', 'Vercel AI SDK', 'RAG',
 ]
 
 export function Skills({ dark }: { dark: boolean }) {
