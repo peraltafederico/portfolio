@@ -8,7 +8,7 @@ import { Footer } from '../components/Footer'
 import { ScrollTrigger } from '../hooks/useGsap'
 import { useTheme } from '../layouts/RootLayout'
 
-const sections = ['about', 'experience', 'skills'] as const
+const sections = ['about', 'experience', 'skills', 'contact'] as const
 
 export function Home() {
   const { dark, setDark } = useTheme()
