@@ -1,48 +1,136 @@
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { useEffect, useRef } from 'react'
+import { Github, Linkedin, Mail, Moon, Sun } from 'lucide-react'
+import { gsap } from '../hooks/useGsap'
 
-export function Hero({ dark }: { dark: boolean }) {
+const navItems = [
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills' },
+]
+
+interface HeroProps {
+  dark: boolean
+  onToggle: () => void
+  activeSection: string
+  onNav: (e: React.MouseEvent<HTMLAnchorElement>, id: string) => void
+}
+
+export function Hero({ dark, onToggle, activeSection, onNav }: HeroProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
   const mutedColor = dark ? '#888' : '#666'
   const textColor = dark ? '#ededed' : '#171717'
+  const activeColor = dark ? '#ededed' : '#171717'
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const name = el.querySelector('[data-hero="name"]')
+    const title = el.querySelector('[data-hero="title"]')
+    const bio = el.querySelector('[data-hero="bio"]')
+    const nav = el.querySelector('[data-hero="nav"]')
+    const links = el.querySelector('[data-hero="links"]')
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+    tl.from(name, { opacity: 0, y: 20, duration: 0.6 })
+      .from(title, { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
+      .from(bio, { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
+      .from(nav, { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
+      .from(links, { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
+
+    return () => { tl.kill() }
+  }, [])
 
   return (
-    <section className="pt-32 pb-20 px-6">
-      <div className="max-w-2xl mx-auto">
-        <div className="mb-6">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold"
-            style={{ backgroundColor: dark ? '#1a1a1a' : '#f0f0f0', color: textColor }}>
-            FP
-          </div>
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-3" style={{ color: textColor }}>
+    <header
+      ref={containerRef}
+      className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24 pt-24 pb-12"
+    >
+      <div>
+        <h1
+          data-hero="name"
+          className="text-4xl sm:text-5xl font-bold tracking-tight"
+          style={{ color: textColor }}
+        >
           Federico Peralta
         </h1>
-        <p className="text-lg mb-6" style={{ color: mutedColor }}>
+        <p data-hero="title" className="text-lg mt-3" style={{ color: mutedColor }}>
           Senior Software Engineer
         </p>
-        <p className="text-base leading-relaxed mb-8 max-w-xl" style={{ color: dark ? '#a0a0a0' : '#555' }}>
-          Building things that matter. Senior Engineer with 7+ years of experience in fullstack development, specializing in React, TypeScript, Node.js and cloud infrastructure. Currently exploring the intersection of AI and vertical SaaS.
+        <p
+          data-hero="bio"
+          className="text-sm leading-relaxed mt-4 max-w-xs"
+          style={{ color: dark ? '#a0a0a0' : '#555' }}
+        >
+          Senior fullstack engineer with 7+ years shipping production apps. React, TypeScript, Node.js, cloud infrastructure. Passionate about AI and building tools that solve real problems.
         </p>
-        <div className="flex gap-4">
-          <a href="https://github.com/peraltafederico" target="_blank" rel="noopener noreferrer"
-            className="p-2.5 rounded-lg transition-all hover:scale-105"
-            style={{ backgroundColor: dark ? '#1a1a1a' : '#f0f0f0', color: mutedColor }}
-            aria-label="GitHub">
-            <Github size={18} />
-          </a>
-          <a href="https://linkedin.com/in/peralta-federico" target="_blank" rel="noopener noreferrer"
-            className="p-2.5 rounded-lg transition-all hover:scale-105"
-            style={{ backgroundColor: dark ? '#1a1a1a' : '#f0f0f0', color: mutedColor }}
-            aria-label="LinkedIn">
-            <Linkedin size={18} />
-          </a>
-          <a href="mailto:peralta.federico.manuel@gmail.com"
-            className="p-2.5 rounded-lg transition-all hover:scale-105"
-            style={{ backgroundColor: dark ? '#1a1a1a' : '#f0f0f0', color: mutedColor }}
-            aria-label="Email">
-            <Mail size={18} />
-          </a>
-        </div>
+
+        <nav data-hero="nav" className="hidden lg:block mt-12">
+          <ul className="space-y-3">
+            {navItems.map(({ id, label }) => {
+              const isActive = activeSection === id
+              return (
+                <li key={id}>
+                  <a
+                    href={`#${id}`}
+                    onClick={(e) => onNav(e, id)}
+                    className="group flex items-center gap-3 text-xs font-medium uppercase tracking-widest transition-all"
+                    style={{ color: isActive ? activeColor : mutedColor }}
+                  >
+                    <span
+                      className="inline-block h-px transition-all"
+                      style={{
+                        width: isActive ? 64 : 32,
+                        backgroundColor: isActive ? activeColor : mutedColor,
+                      }}
+                    />
+                    {label}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
       </div>
-    </section>
+
+      <div data-hero="links" className="flex items-center gap-4 mt-8 lg:mt-0">
+        <a
+          href="https://github.com/peraltafederico"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="transition-colors hover:opacity-80"
+          style={{ color: mutedColor }}
+          aria-label="GitHub"
+        >
+          <Github size={18} />
+        </a>
+        <a
+          href="https://linkedin.com/in/peralta-federico"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="transition-colors hover:opacity-80"
+          style={{ color: mutedColor }}
+          aria-label="LinkedIn"
+        >
+          <Linkedin size={18} />
+        </a>
+        <a
+          href="mailto:peralta.federico.manuel@gmail.com"
+          className="transition-colors hover:opacity-80"
+          style={{ color: mutedColor }}
+          aria-label="Email"
+        >
+          <Mail size={18} />
+        </a>
+        <button
+          onClick={onToggle}
+          className="p-1 transition-colors cursor-pointer ml-2"
+          style={{ color: mutedColor }}
+          aria-label="Toggle theme"
+        >
+          {dark ? <Sun size={16} /> : <Moon size={16} />}
+        </button>
+      </div>
+    </header>
   )
 }

@@ -1,4 +1,4 @@
-import { useFadeIn } from '../hooks/useFadeIn'
+import { useScrollReveal } from '../hooks/useGsap'
 
 const jobs = [
   {
@@ -53,47 +53,34 @@ const jobs = [
 ]
 
 export function Experience({ dark }: { dark: boolean }) {
-  const ref = useFadeIn()
+  const ref = useScrollReveal<HTMLElement>({ stagger: 0.15 })
   const textColor = dark ? '#ededed' : '#171717'
   const mutedColor = dark ? '#888' : '#666'
-  const borderColor = dark ? '#1f1f1f' : '#e5e5e5'
-  const dotColor = dark ? '#333' : '#ccc'
-  const lineColor = dark ? '#1a1a1a' : '#e0e0e0'
 
   return (
-    <section id="experience" ref={ref as React.RefObject<HTMLElement>} className="fade-in py-20 px-6">
-      <div className="max-w-2xl mx-auto">
-        <h2 className="text-sm font-medium uppercase tracking-widest mb-10" style={{ color: mutedColor }}>
-          Experience
-        </h2>
-        <div className="relative">
-          <div className="absolute left-[5px] top-2 bottom-2 w-px" style={{ backgroundColor: lineColor }} />
-          <div className="space-y-10">
-            {jobs.map((job, i) => (
-              <div key={i} className="relative pl-8">
-                <div className="absolute left-0 top-[7px] w-[11px] h-[11px] rounded-full border-2"
-                  style={{ borderColor: i === 0 ? '#3b82f6' : dotColor, backgroundColor: i === 0 ? '#3b82f6' : 'transparent' }} />
-                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1">
-                  <h3 className="font-semibold text-[15px]" style={{ color: textColor }}>
-                    {job.role}
-                  </h3>
-                  <span className="text-xs mt-0.5 sm:mt-0 shrink-0" style={{ color: mutedColor }}>
-                    {job.period}
-                  </span>
-                </div>
-                <p className="text-sm mb-2" style={{ color: dark ? '#3b82f6' : '#2563eb' }}>
-                  {job.company} <span style={{ color: mutedColor }}>· {job.location}</span>
-                </p>
-                <p className="text-sm leading-relaxed" style={{ color: mutedColor }}>
-                  {job.description}
-                </p>
-                {i < jobs.length - 1 && (
-                  <div className="mt-10 -mx-8 h-px" style={{ backgroundColor: borderColor, opacity: 0.5 }} />
-                )}
-              </div>
-            ))}
+    <section id="experience" ref={ref} className="py-20 lg:py-24">
+      <h2 className="text-sm font-medium uppercase tracking-widest mb-10" style={{ color: mutedColor }}>
+        Experience
+      </h2>
+      <div className="space-y-10">
+        {jobs.map((job, i) => (
+          <div key={i}>
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1">
+              <h3 className="font-semibold text-[15px]" style={{ color: textColor }}>
+                {job.role}
+              </h3>
+              <span className="text-xs mt-0.5 sm:mt-0 shrink-0" style={{ color: mutedColor }}>
+                {job.period}
+              </span>
+            </div>
+            <p className="text-sm mb-2" style={{ color: dark ? '#3b82f6' : '#2563eb' }}>
+              {job.company} <span style={{ color: mutedColor }}>· {job.location}</span>
+            </p>
+            <p className="text-sm leading-relaxed" style={{ color: mutedColor }}>
+              {job.description}
+            </p>
           </div>
-        </div>
+        ))}
       </div>
     </section>
   )
