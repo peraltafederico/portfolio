@@ -32,12 +32,12 @@ export function Hero({ dark, onToggle, activeSection, onNav }: HeroProps) {
     const nav = el.querySelector('[data-hero="nav"]')
     const links = el.querySelector('[data-hero="links"]')
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-    tl.from(name, { opacity: 0, y: 20, duration: 0.6 })
-      .from(title, { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
-      .from(bio, { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
-      .from(nav, { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
-      .from(links, { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.6 } })
+    tl.from(name, { opacity: 0, y: 20 })
+      .from(title, { opacity: 0, y: 20 }, '-=0.5')
+      .from(bio, { opacity: 0, y: 20 }, '-=0.5')
+      .from(nav, { opacity: 0, y: 20 }, '-=0.5')
+      .from(links, { opacity: 0, y: 20 }, '-=0.5')
 
     return () => { tl.kill() }
   }, [])
@@ -75,11 +75,14 @@ export function Hero({ dark, onToggle, activeSection, onNav }: HeroProps) {
                   <a
                     href={`#${id}`}
                     onClick={(e) => onNav(e, id)}
-                    className="group flex items-center gap-3 text-xs font-medium uppercase tracking-widest transition-all"
-                    style={{ color: isActive ? activeColor : mutedColor }}
+                    className="group flex items-center gap-3 text-xs font-medium uppercase tracking-widest transition-all duration-200 hover:!text-[var(--nav-active)]"
+                    style={{
+                      color: isActive ? activeColor : mutedColor,
+                      '--nav-active': activeColor,
+                    } as React.CSSProperties}
                   >
                     <span
-                      className="inline-block h-px transition-all"
+                      className="inline-block h-px transition-all duration-200 group-hover:w-16"
                       style={{
                         width: isActive ? 64 : 32,
                         backgroundColor: isActive ? activeColor : mutedColor,
@@ -99,7 +102,7 @@ export function Hero({ dark, onToggle, activeSection, onNav }: HeroProps) {
           href="https://github.com/peraltafederico"
           target="_blank"
           rel="noopener noreferrer"
-          className="transition-colors hover:opacity-80"
+          className="transition-all duration-200 hover:scale-110"
           style={{ color: mutedColor }}
           aria-label="GitHub"
         >
@@ -109,7 +112,7 @@ export function Hero({ dark, onToggle, activeSection, onNav }: HeroProps) {
           href="https://linkedin.com/in/peralta-federico"
           target="_blank"
           rel="noopener noreferrer"
-          className="transition-colors hover:opacity-80"
+          className="transition-all duration-200 hover:scale-110"
           style={{ color: mutedColor }}
           aria-label="LinkedIn"
         >
@@ -117,7 +120,7 @@ export function Hero({ dark, onToggle, activeSection, onNav }: HeroProps) {
         </a>
         <a
           href="mailto:peralta.federico.manuel@gmail.com"
-          className="transition-colors hover:opacity-80"
+          className="transition-all duration-200 hover:scale-110"
           style={{ color: mutedColor }}
           aria-label="Email"
         >
@@ -125,7 +128,7 @@ export function Hero({ dark, onToggle, activeSection, onNav }: HeroProps) {
         </a>
         <button
           onClick={onToggle}
-          className="p-1 transition-colors cursor-pointer ml-2"
+          className="p-1 transition-all duration-200 hover:scale-110 cursor-pointer ml-2"
           style={{ color: mutedColor }}
           aria-label="Toggle theme"
         >

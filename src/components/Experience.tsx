@@ -118,9 +118,12 @@ export function Experience({ dark }: { dark: boolean }) {
       >
         Experience
       </h2>
-      <div className="space-y-10">
+      <div className="group/list space-y-10">
         {jobs.map((job, i) => (
-          <div key={i} className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-1 sm:gap-6">
+          <div
+            key={i}
+            className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-1 sm:gap-6 group/item rounded-lg p-4 -mx-4 transition-all duration-200 lg:group-hover/list:opacity-50 lg:hover:!opacity-100 lg:hover:bg-white/[0.03]"
+          >
             <span
               className="text-xs pt-1 shrink-0 whitespace-nowrap"
               style={{ color: mutedColor }}
@@ -142,7 +145,7 @@ export function Experience({ dark }: { dark: boolean }) {
                 {job.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="text-[11px] font-medium px-2.5 py-1 rounded-full"
+                    className="text-[11px] font-medium px-2.5 py-1 rounded-full transition-transform duration-150 hover:scale-105"
                     style={{ backgroundColor: pillBg, color: pillColor }}
                   >
                     {skill}
