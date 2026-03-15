@@ -1,0 +1,82 @@
+# CLAUDE.md - Portfolio Project
+
+## Project
+Personal portfolio for Federico Peralta (federicoperalta.com)
+
+## Stack
+- **Framework:** Astro with React islands
+- **Styling:** Tailwind CSS v4 + custom dark/light theme via `html.dark`/`html.light` class
+- **Animations:** GSAP + ScrollTrigger
+- **Backend:** Astro API routes on Cloudflare Workers
+- **Email:** Resend (contact form)
+- **Deploy:** Cloudflare Workers via `npx wrangler deploy`
+
+## Directory Structure
+```
+src/
+  layouts/Layout.astro     # Base HTML layout (meta tags, splash, scripts)
+  pages/
+    index.astro            # Homepage (static)
+    contact.astro          # Contact page (static)
+    api/contact.ts         # POST /api/contact (Resend email, server-side)
+  components/
+    About.astro            # Pure static (zero JS)
+    Experience.astro       # Pure static (zero JS)
+    Skills.astro           # Pure static (zero JS)
+    Footer.astro           # Pure static (zero JS)
+    Hero.tsx               # React island (GSAP animations, nav)
+    ContactCTA.tsx         # React island (GSAP letter animation, navigation)
+    ContactForm.tsx        # React island (form state, submit)
+    MouseSpotlight.tsx     # React island (mousemove listener)
+    ThemeToggle.tsx        # React island (localStorage theme)
+  hooks/
+    useGsap.ts             # GSAP + ScrollTrigger setup
+    useTheme.ts            # Theme hook (reads DOM class, MutationObserver)
+  styles/global.css        # Tailwind + dark mode + GSAP initial states
+public/
+  favicon.svg              # "fp" italic logo
+  sitemap.xml              # Sitemap for SEO
+```
+
+## Key Concepts
+
+### Static vs Interactive
+- `.astro` components = pure HTML, zero JS sent to browser
+- `.tsx` components with `client:load` = React hydrated in browser
+- Only use React when interactivity is needed (GSAP, state, events)
+
+### Theme System
+- Dark/light via `html` class (`dark`/`light`)
+- Static components use Tailwind `dark:` variants
+- React components use `useTheme()` hook (MutationObserver on `html` class)
+- Blocking `<script is:inline>` in Layout.astro reads localStorage before paint
+
+### Splash Screen
+- "fp" in italic, shows on first visit only (sessionStorage flag)
+- Managed entirely in Layout.astro with inline scripts (no React)
+
+## Rules
+- NEVER use em dashes anywhere. Use commas or periods instead.
+- Dark mode background: #141414 (not pure black)
+- All content text must be in the .astro files or data arrays, not hidden in JS
+- Experience data is hardcoded in Experience.astro frontmatter
+- Skills data is hardcoded in Skills.astro frontmatter
+
+## Build & Deploy
+```bash
+pnpm run build          # Astro build (SSG + server)
+npx wrangler deploy     # Deploy to Cloudflare Workers
+```
+
+## Git Flow
+```bash
+git add -A
+git commit -m "type: description"
+git push
+```
+Commit directly to main. No branches for this project.
+
+## Environment
+- RESEND_API_KEY: Wrangler secret (for contact form emails)
+- Domain: federicoperalta.com (Cloudflare DNS)
+- Repo: https://github.com/peraltafederico/portfolio
